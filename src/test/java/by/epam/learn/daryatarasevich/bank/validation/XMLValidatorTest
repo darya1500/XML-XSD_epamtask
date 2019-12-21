@@ -1,0 +1,22 @@
+package by.epam.learn.daryatarasevich.bank.validation;
+
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.XMLInvalidException;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import java.io.IOException;
+import static org.testng.Assert.*;
+
+public class XMLValidatorTest {
+    private XMLValidator xmlValidator;
+
+    @BeforeMethod
+    public void setUp() {
+        xmlValidator=new XMLValidator();
+    }
+
+    @Test
+    public void testValidate() throws XMLInvalidException, IncorrectFilePathException, IOException {
+        assertTrue(xmlValidator.validate("bankdeposits.xml","bankdeposits.xsd"));
+    }
+}
