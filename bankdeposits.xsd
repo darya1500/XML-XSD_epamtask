@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           elementFormDefault="qualified"
+           targetNamespace="https://www.standart-namespace.com"
+           xmlns="https://www.standart-namespace.com">
+    <xs:element name="banks">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="deposit" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="bankname" type="xs:string"/>
+                            <xs:element name="country" type="xs:string" />
+                            <xs:element name="type" type="DepositType"/>
+                            <xs:element name="depositor" type="xs:string"/>
+                            <xs:element name="accountid" type="xs:int"/>
+                            <xs:element name="amountondeposit" type="xs:int"/>
+                            <xs:element name="profitability" type="xs:int"/>
+                            <xs:element name="timeconstraints" type="xs:date"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="required"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="DepositType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ondemand"/>
+            <xs:enumeration value="periodic"/>
+            <xs:enumeration value="calculated"/>
+            <xs:enumeration value="accumulation"/>
+            <xs:enumeration value="saving"/>
+            <xs:enumeration value="metal"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
