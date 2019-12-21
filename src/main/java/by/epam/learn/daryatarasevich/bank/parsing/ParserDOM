@@ -1,0 +1,110 @@
+package by.epam.learn.daryatarasevich.bank.parsing;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.ParserConfigurationException;
+import by.epam.learn.daryatarasevich.bank.action.DateConverter;
+import by.epam.learn.daryatarasevich.bank.entity.ConstantOfDeposit;
+import by.epam.learn.daryatarasevich.bank.exception.ConstantMessages;
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.InvalidInformationException;
+import by.epam.learn.daryatarasevich.bank.entity.Deposit;
+import by.epam.learn.daryatarasevich.bank.entity.DepositType;
+import by.epam.learn.daryatarasevich.bank.exception.XMLInvalidException;
+import by.epam.learn.daryatarasevich.bank.validation.FileValidator;
+import by.epam.learn.daryatarasevich.bank.validation.XMLValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.w3c.dom.*;
+import org.xml.sax.SAXException;
+import java.io.File;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ParserDOM extends Parser {
+    private List<Deposit> deposits = new ArrayList<>();
+    private static final Logger LOGGER = LogManager.getLogger(ParserDOM.class);
+
+    public ParserDOM() {
+    }
+    /**
+     * To parse xml file with DOM parser.
+     * Firstly to create parser, then to parse xml file to list of deposits.
+     *
+     * @param fileName-xml file to parse
+     * @param xsd-xsd scheme for validation
+     * @return deposits
+     */
+    public List<Deposit> parse(String fileName,String xsd) throws ParserConfigurationException, IOException, SAXException, InvalidInformationException, ParseException, IncorrectFilePathException, XMLInvalidException {
+        FileValidator fileValidator=new FileValidator();
+        if (!fileValidator.doesFileExist(fileName)) {
+            LOGGER.error(ConstantMessages.FILE_NAME_IS_INCORRECT);
+            throw new IncorrectFilePathException(ConstantMessages.FILE_NAME_IS_INCORRECT);
+        }
+        XMLValidator xmlValidator=new XMLValidator();
+        if (!xmlValidator.validate(fileName,xsd)) {
+            LOGGER.error(ConstantMessages.XML_FILE_IS_NOT_VALID);
+            throw new XMLInvalidException(ConstantMessages.XML_FILE_IS_NOT_VALID);
+        }
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        Document document = builder.parse(new File(fileName));
+        document.getDocumentElement().normalize();
+        NodeList depositElements = document.getElementsByTagName(ConstantOfDeposit.DEPOSIT);
+        for (int i = 0; i < depositElements.getLength(); i++) {
+            Deposit deposit=new Deposit();
+            NamedNodeMap attributes = depositElements.item(i).getAttributes();
+            deposit.setId(attributes.getNamedItem(ConstantOfDeposit.ID).getNodeValue());
+            for (int j=0;j<depositElements.item(i).getChildNodes().getLength();j++){
+                Node depositNode = depositElements.item(i).getChildNodes().item(j);
+                switch (depositNode.getNodeName()){
+                    case (ConstantOfDeposit.BANKNAME):
+                        deposit.setBankName(depositNode.getFirstChild().getNodeValue());
+                        break;
+                    case(ConstantOfDeposit.COUNTRY):
+                        deposit.setCountry(depositNode.getFirstChild().getNodeValue());
+                        break;
+                    case(ConstantOfDeposit.TYPE):
+                        deposit.setType(DepositType.valueOf(depositNode.getFirstChild().getNodeValue().toUpperCase()));
+                        break;
+                    case(ConstantOfDeposit.DEPOSITOR):
+                        deposit.setDepositor(depositNode.getFirstChild().getNodeValue());
+                        break;
+                    case(ConstantOfDeposit.ACCOUNTID):
+                        deposit.setAccountID(Integer.parseInt(depositNode.getFirstChild().getNodeValue()));
+                        break;
+                    case(ConstantOfDeposit.AMOUNTONDEPOSIT):
+                        deposit.setAmountOnDeposit(Integer.parseInt(depositNode.getFirstChild().getNodeValue()));
+                        break;
+                    case(ConstantOfDeposit.PROFITABILITY):
+                        deposit.setProfitability(Integer.parseInt(depositNode.getFirstChild().getNodeValue()));
+                        break;
+                    case(ConstantOfDeposit.TIMECONSTRAINTS):
+                        DateConverter dateConverter =new DateConverter();
+                        deposit.setTimeconstraints(dateConverter.convertStringToDate(depositNode.getFirstChild().getNodeValue()));
+                        break;
+                    case("#text"):
+                        break;
+                    default:
+                        LOGGER.error(ConstantMessages.INVALID_INFORMATION);
+                        throw new InvalidInformationException(ConstantMessages.INVALID_INFORMATION);
+                }
+            }
+            deposits.add(deposit);
+        }
+        return deposits;
+    }
+    /**
+     * To print list of deposits.
+     *
+     * @param deposits-list of deposits to print
+     */
+    public void print(List<Deposit> deposits){
+        for (Deposit d : deposits){
+            System.out.println(d.toString());
+        }
+    }
+}
+
