@@ -1,0 +1,127 @@
+package by.epam.learn.daryatarasevich.bank.parsing;
+
+import by.epam.learn.daryatarasevich.bank.action.DateConverter;
+import by.epam.learn.daryatarasevich.bank.entity.ConstantOfDeposit;
+import by.epam.learn.daryatarasevich.bank.entity.Deposit;
+import by.epam.learn.daryatarasevich.bank.entity.DepositType;
+import by.epam.learn.daryatarasevich.bank.exception.ConstantMessages;
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.InvalidInformationException;
+import by.epam.learn.daryatarasevich.bank.exception.XMLInvalidException;
+import by.epam.learn.daryatarasevich.bank.validation.FileValidator;
+import by.epam.learn.daryatarasevich.bank.validation.XMLValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.xml.sax.SAXException;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.events.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class ParserSTAX extends Parser {
+    private List<Deposit> deposits = new ArrayList<>();
+    private static final Logger LOGGER = LogManager.getLogger(ParserSTAX.class);
+
+    public ParserSTAX() {
+    }
+
+    public List<Deposit> getDeposits() {
+        return deposits;
+    }
+    /**
+     * To parse xml file with STAX parser.
+     * Firstly to create parser, then to parse xml file to list of deposits.
+     *
+     * @param fileName-xml file to parse
+     * @param xsd-xsd scheme for validation
+     * @return deposits
+     */
+    public List<Deposit> parse(String fileName,String xsd) throws IOException, XMLStreamException, InvalidInformationException, ParseException, IncorrectFilePathException, SAXException, XMLInvalidException {
+        FileValidator fileValidator=new FileValidator();
+        if (!fileValidator.doesFileExist(fileName)) {
+            LOGGER.error(ConstantMessages.FILE_NAME_IS_INCORRECT);
+            throw new IncorrectFilePathException(ConstantMessages.FILE_NAME_IS_INCORRECT);
+        }
+        XMLValidator xmlValidator=new XMLValidator();
+        if (!xmlValidator.validate(fileName,xsd)) {
+            LOGGER.error(ConstantMessages.XML_FILE_IS_NOT_VALID);
+            throw new XMLInvalidException(ConstantMessages.XML_FILE_IS_NOT_VALID);
+        }
+        XMLInputFactory factory = XMLInputFactory.newInstance();
+        XMLEventReader eventReader = factory.createXMLEventReader(new FileReader(new File(fileName)));
+        Deposit deposit=new Deposit();
+        while (eventReader.hasNext()) {
+            XMLEvent xmlEvent = eventReader.nextEvent();
+            if (xmlEvent.isStartElement()) {
+                StartElement startElement = xmlEvent.asStartElement();
+                Iterator<Attribute> iterator = startElement.getAttributes();
+                while (iterator.hasNext()) {
+                    Attribute attribute = iterator.next();
+                    QName qName = attribute.getName();
+                    if (qName.toString().equals(ConstantOfDeposit.ID)) {
+                        deposit.setId(attribute.getValue());
+                    }
+                }
+                Characters chars=(Characters)eventReader.nextEvent();
+                switch (startElement.getName().getLocalPart()){
+                    case(ConstantOfDeposit.BANKS): break;
+                    case(ConstantOfDeposit.DEPOSIT): break;
+                    case (ConstantOfDeposit.BANKNAME):
+                        deposit.setBankName(chars.toString());
+                        break;
+                    case(ConstantOfDeposit.COUNTRY):
+                        deposit.setCountry(chars.toString());
+                        break;
+                    case(ConstantOfDeposit.DEPOSITOR):
+                        deposit.setDepositor(chars.toString());
+                        break;
+                    case(ConstantOfDeposit.ACCOUNTID):
+                        deposit.setAccountID(Integer.parseInt(chars.toString()));
+                        break;
+                    case(ConstantOfDeposit.AMOUNTONDEPOSIT):
+                        deposit.setAmountOnDeposit(Integer.parseInt(chars.toString()));
+                        break;
+                    case(ConstantOfDeposit.PROFITABILITY):
+                        deposit.setProfitability(Integer.parseInt(chars.toString()));
+                        break;
+                    case(ConstantOfDeposit.TIMECONSTRAINTS):
+                        DateConverter dateConverter =new DateConverter();
+                        deposit.setTimeconstraints(dateConverter.convertStringToDate(chars.toString()));
+                        break;
+                    case(ConstantOfDeposit.TYPE):
+                        deposit.setType(DepositType.valueOf(chars.toString().toUpperCase()));
+                        break;
+                    default:
+                        LOGGER.error(ConstantMessages.INVALID_INFORMATION);
+                        throw new InvalidInformationException(ConstantMessages.INVALID_INFORMATION);
+                }
+            }
+            if (xmlEvent.isEndElement()) {
+                EndElement endElement = xmlEvent.asEndElement();
+                if (endElement.getName().getLocalPart().equals(ConstantOfDeposit.DEPOSIT)){
+                    deposits.add(deposit);
+                    deposit=new Deposit();
+                }
+            }
+        }
+        return deposits;
+    }
+    /**
+     * To print list of deposits.
+     *
+     * @param deposits-list of deposits to print
+     */
+     public void print(List<Deposit> deposits){
+        for (Deposit d : deposits){
+            System.out.println(d.toString());
+        }
+    }
+}
