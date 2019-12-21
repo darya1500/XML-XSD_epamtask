@@ -1,0 +1,28 @@
+package by.epam.learn.daryatarasevich.bank.validation;
+
+import by.epam.learn.daryatarasevich.bank.exception.ConstantMessages;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.io.File;
+
+public class FileValidator {
+    private static final Logger LOGGER = LogManager.getLogger(FileValidator.class);
+
+    public FileValidator() {
+    }
+    /**
+     * To validate that file exists.
+     *
+     * @param fileName
+     * @return true(if file exists)
+     * @throws NullPointerException
+     */
+    public boolean doesFileExist(String fileName){
+        if (fileName != null && new File(fileName).exists()) {
+            return true;
+        } else {
+            LOGGER.error(ConstantMessages.FILE_NOT_EXIST);
+            throw new NullPointerException(ConstantMessages.FILE_NOT_EXIST);
+        }
+    }
+}
