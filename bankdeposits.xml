@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<banks xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="https://www.standart-namespace.com"
+       xsi:schemaLocation="http://standart-namespace.com bankdeposits.xsd">
+    <deposit id="a01">
+        <bankname>Priorbank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Ivanov</depositor>
+        <accountid>281467</accountid>
+        <amountondeposit>120</amountondeposit>
+        <profitability>2</profitability>
+        <timeconstraints>2021-10-13</timeconstraints>
+    </deposit>
+    <deposit id="a02">
+        <bankname>IdeaBank</bankname>
+        <country>Belarus</country>
+        <type>ondemand</type>
+        <depositor>Petrov</depositor>
+        <accountid>2896325</accountid>
+        <amountondeposit>10000</amountondeposit>
+        <profitability>3</profitability>
+        <timeconstraints>2025-09-06</timeconstraints>
+    </deposit>
+    <deposit id="a03">
+        <bankname>Belarusbank</bankname>
+        <country>Belarus</country>
+        <type>periodic</type>
+        <depositor>Ivanova</depositor>
+        <accountid>265475</accountid>
+        <amountondeposit>4000</amountondeposit>
+        <profitability>1</profitability>
+        <timeconstraints>2027-09-28</timeconstraints>
+    </deposit>
+    <deposit id="a04">
+        <bankname>Alphabank</bankname>
+        <country>Belarus</country>
+        <type>calculated</type>
+        <depositor>Voronov</depositor>
+        <accountid>12369475</accountid>
+        <amountondeposit>800</amountondeposit>
+        <profitability>3</profitability>
+        <timeconstraints>2020-02-02</timeconstraints>
+    </deposit>
+    <deposit id="a05">
+        <bankname>BelInvestBank</bankname>
+        <country>Belarus</country>
+        <type>accumulation</type>
+        <depositor>Lis</depositor>
+        <accountid>00969475</accountid>
+        <amountondeposit>4800</amountondeposit>
+        <profitability>3</profitability>
+        <timeconstraints>2028-03-05</timeconstraints>
+    </deposit>
+    <deposit id="a06">
+        <bankname>Belagroprombank</bankname>
+        <country>Belarus</country>
+        <type>metal</type>
+        <depositor>Ivanov</depositor>
+        <accountid>8758475</accountid>
+        <amountondeposit>10000</amountondeposit>
+        <profitability>2</profitability>
+        <timeconstraints>2023-12-12</timeconstraints>
+    </deposit>
+    <deposit id="a07">
+        <bankname>VTBbank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Novik</depositor>
+        <accountid>32145475</accountid>
+        <amountondeposit>2000</amountondeposit>
+        <profitability>2</profitability>
+        <timeconstraints>2026-09-29</timeconstraints>
+    </deposit>
+    <deposit id="a08">
+        <bankname>Swiss</bankname>
+        <country>Switzerland</country>
+        <type>accumulation</type>
+        <depositor>Smith</depositor>
+        <accountid>22635475</accountid>
+        <amountondeposit>15000</amountondeposit>
+        <profitability>1</profitability>
+        <timeconstraints>2026-09-01</timeconstraints>
+    </deposit>
+    <deposit id="a09">
+        <bankname>ZepterBank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Sanchez</depositor>
+        <accountid>280475</accountid>
+        <amountondeposit>4000</amountondeposit>
+        <profitability>6</profitability>
+        <timeconstraints>2030-05-30</timeconstraints>
+    </deposit>
+    <deposit id="a10">
+        <bankname>BPSbank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Vasilieva</depositor>
+        <accountid>000126475</accountid>
+        <amountondeposit>9000</amountondeposit>
+        <profitability>1</profitability>
+        <timeconstraints>2020-08-04</timeconstraints>
+    </deposit>
+    <deposit id="a11">
+        <bankname>MTbank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Bobrova</depositor>
+        <accountid>56300178</accountid>
+        <amountondeposit>3700</amountondeposit>
+        <profitability>3</profitability>
+        <timeconstraints>2023-10-21</timeconstraints>
+    </deposit>
+    <deposit id="a12">
+        <bankname>BelWeb</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Popov</depositor>
+        <accountid>5997878</accountid>
+        <amountondeposit>10000</amountondeposit>
+        <profitability>3</profitability>
+        <timeconstraints>2020-02-24</timeconstraints>
+    </deposit>
+    <deposit id="a13">
+        <bankname>BSBBank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Sokolova</depositor>
+        <accountid>9675878</accountid>
+        <amountondeposit>7000</amountondeposit>
+        <profitability>3</profitability>
+        <timeconstraints>2025-01-13</timeconstraints>
+    </deposit>
+    <deposit id="a14">
+        <bankname>Belgazprombank</bankname>
+        <country>Belarus</country>
+        <type>metal</type>
+        <depositor>Novikov</depositor>
+        <accountid>11878</accountid>
+        <amountondeposit>900</amountondeposit>
+        <profitability>1</profitability>
+        <timeconstraints>2020-07-09</timeconstraints>
+    </deposit>
+    <deposit id="a15">
+        <bankname>RRBbank</bankname>
+        <country>Belarus</country>
+        <type>accumulation</type>
+        <depositor>Morozov</depositor>
+        <accountid>66678948</accountid>
+        <amountondeposit>22000</amountondeposit>
+        <profitability>1</profitability>
+        <timeconstraints>2027-06-11</timeconstraints>
+    </deposit>
+    <deposit id="a16">
+        <bankname>Paritetbank</bankname>
+        <country>Belarus</country>
+        <type>saving</type>
+        <depositor>Pavlov</depositor>
+        <accountid>8721128</accountid>
+        <amountondeposit>3500</amountondeposit>
+        <profitability>1</profitability>
+        <timeconstraints>2021-01-10</timeconstraints>
+    </deposit>
+</banks>
