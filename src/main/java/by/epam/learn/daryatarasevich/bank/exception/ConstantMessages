@@ -1,0 +1,11 @@
+package by.epam.learn.daryatarasevich.bank.exception;
+
+public class ConstantMessages {
+    public static final String FILE_NAME_IS_INCORRECT ="File name is incorrect" ;
+    public static final String DATE_IS_NULL ="Date is null" ;
+    public static final String STRING_IS_NULL = "String is null";
+    public static final String XML_FILE_IS_NOT_VALID = "XML file is not valid";
+    public static final String FILE_NOT_EXIST = "File does not exist";
+    public static final String INVALID_INFORMATION = "Invalid information";
+    public static final String UNEXPECTED_VALUE = "Unexpected value: ";
+}
