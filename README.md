@@ -20,8 +20,8 @@ Use:
 + type ID
 + setting attribute values by default
 + type extension (imitation of inheritance)
-+ date-time
-+ create at least 16 entities in xml document
++ [date-time](https://github.com/darya1500/taskepam/blob/master/src/main/java/by/epam/learn/daryatarasevich/bank/action/DateConverter)
++ create at least 16 [entities](https://github.com/darya1500/taskepam/blob/master/src/main/java/by/epam/learn/daryatarasevich/bank/entity/Deposit) in xml document
 + organize parsers using the Builder template
 + use Log4J2 for logging
 + code should be [covered by tests](https://github.com/darya1500/taskepam/tree/master/src/test/java/by/epam/learn/daryatarasevich/bank)
