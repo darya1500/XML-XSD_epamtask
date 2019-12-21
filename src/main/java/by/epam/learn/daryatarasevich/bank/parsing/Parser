@@ -1,0 +1,28 @@
+package by.epam.learn.daryatarasevich.bank.parsing;
+
+import by.epam.learn.daryatarasevich.bank.entity.Deposit;
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.InvalidInformationException;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Parser {
+    List<Deposit> deposits;
+
+    Parser() {
+        this.deposits = new ArrayList<>();
+    }
+
+    public List<Deposit> parse(String fileName) throws ParserConfigurationException, IOException, SAXException, InvalidInformationException, ParseException, XMLStreamException, IncorrectFilePathException {
+        return null;
+    }
+
+    public void print(List<Deposit> deposits){
+
+    }
+}
