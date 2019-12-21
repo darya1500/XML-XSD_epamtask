@@ -1,0 +1,8 @@
+package by.epam.learn.daryatarasevich.bank.exception;
+
+public class XMLInvalidException extends Exception {
+
+    public XMLInvalidException(String message) {
+        super(message);
+    }
+}
