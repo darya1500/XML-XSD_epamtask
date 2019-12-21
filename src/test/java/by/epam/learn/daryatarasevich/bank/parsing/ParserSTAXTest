@@ -1,0 +1,38 @@
+package by.epam.learn.daryatarasevich.bank.parsing;
+
+import by.epam.learn.daryatarasevich.bank.entity.Deposit;
+import by.epam.learn.daryatarasevich.bank.entity.DepositType;
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.InvalidInformationException;
+import by.epam.learn.daryatarasevich.bank.exception.XMLInvalidException;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import static org.testng.Assert.assertEquals;
+
+public class ParserSTAXTest {
+    private ParserSTAX parserSTAX;
+    private List<Deposit> expected;
+    private String xml;
+    private String xsd;
+
+    @BeforeMethod
+    public void setUp() {
+        parserSTAX = new ParserSTAX();
+        xml = "bankdeposits.xml";
+        xsd = "bankdeposits.xsd";
+        expected = new ArrayList<>();
+        expected.add(new Deposit("a01","Priorbank","Belarus", DepositType.SAVING,"Ivanov", 281467, 120, 2, new Date(1634083200000L)));
+    }
+
+    @Test
+    public void testParse() throws ParseException, InvalidInformationException, IOException, XMLStreamException, XMLInvalidException, SAXException, IncorrectFilePathException {
+        assertEquals( parserSTAX.parse(xml,xsd).get(0).toString(),expected.get(0).toString());
+    }
+}
