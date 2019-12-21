@@ -1,0 +1,43 @@
+package by.epam.learn.daryatarasevich.bank.action;
+
+import by.epam.learn.daryatarasevich.bank.exception.ConstantMessages;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+public class DateConverter {
+    private SimpleDateFormat simpleDateFormat;
+    private static final Logger LOGGER = LogManager.getLogger(DateConverter.class);
+    /**
+     * To convert date to a string in specific format.
+     *
+     * @param date
+     * @return dateNew
+     */
+    public String convertDateToString(Date date){
+        if (date == null) {
+            LOGGER.error(ConstantMessages.DATE_IS_NULL);
+            throw new NullPointerException(ConstantMessages.DATE_IS_NULL);
+        }
+        simpleDateFormat=new SimpleDateFormat("dd MM yyyy");
+        String dateNew=simpleDateFormat.format(date);
+        return dateNew;
+    }
+    /**
+     * To convert string to date in specific format.
+     *
+     * @param string
+     * @return date
+     */
+    public Date convertStringToDate(String string) throws ParseException {
+        if (string == null) {
+            LOGGER.error(ConstantMessages.STRING_IS_NULL);
+            throw new NullPointerException(ConstantMessages.STRING_IS_NULL);
+        }
+        simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date date=simpleDateFormat.parse(string);
+        return date;
+    }
+}
