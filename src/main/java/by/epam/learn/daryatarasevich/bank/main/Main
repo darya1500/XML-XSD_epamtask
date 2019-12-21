@@ -1,0 +1,30 @@
+package by.epam.learn.daryatarasevich.bank.main;
+
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.InvalidInformationException;
+import by.epam.learn.daryatarasevich.bank.exception.XMLInvalidException;
+import by.epam.learn.daryatarasevich.bank.parsing.ParserDOM;
+import by.epam.learn.daryatarasevich.bank.parsing.ParserSAX;
+import by.epam.learn.daryatarasevich.bank.parsing.ParserSTAX;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.stream.XMLStreamException;
+import java.io.IOException;
+import java.text.ParseException;
+
+public class Main {
+    public static void main(String[] args) throws ParserConfigurationException, SAXException, IOException, InvalidInformationException, XMLStreamException, ParseException, IncorrectFilePathException, XMLInvalidException {
+        String xsd="bankdeposits.xsd";
+        String xml="bankdeposits.xml";
+        ParserSAX parserSAX = new ParserSAX();
+        parserSAX.print(parserSAX.parse(xml,xsd));
+
+        ParserDOM parserDOM=new ParserDOM();
+        parserDOM.print(parserDOM.parse(xml,xsd));
+
+        ParserSTAX parserSTAX=new ParserSTAX();
+        parserSTAX.print(parserSTAX.parse(xml,xsd));
+    }
+}
+
+
