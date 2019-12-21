@@ -1,0 +1,9 @@
+package by.epam.learn.daryatarasevich.bank.exception;
+
+public class InvalidInformationException extends Exception {
+
+    public InvalidInformationException(String message) {
+        super(message);
+    }
+}
+
