@@ -1,0 +1,119 @@
+package by.epam.learn.daryatarasevich.bank.entity;
+
+import by.epam.learn.daryatarasevich.bank.action.DateConverter;
+import java.util.Date;
+
+public class Deposit {
+    private String id;
+    private String bankName;
+    private String country;
+    private DepositType type;
+    private String depositor;
+    private int accountID;
+    private int amountOnDeposit;
+    private int profitability;
+    private Date timeconstraints;
+
+    public Deposit() {
+    }
+
+    public Deposit(String  id, String bankName, String country, DepositType type, String depositor, int accountID, int amountOnDeposit, int profitability, Date timeconstraints) {
+        this.id=id;
+        this.bankName = bankName;
+        this.country = country;
+        this.type = type;
+        this.depositor = depositor;
+        this.accountID = accountID;
+        this.amountOnDeposit = amountOnDeposit;
+        this.profitability = profitability;
+        this.timeconstraints = timeconstraints;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public String getDepositor() {
+        return depositor;
+    }
+
+    public void setDepositor(String depositor) {
+        this.depositor = depositor;
+    }
+
+    public int getAccountID() {
+        return accountID;
+    }
+
+    public void setAccountID(int accountID) {
+        this.accountID = accountID;
+    }
+
+    public int getAmountOnDeposit() {
+        return amountOnDeposit;
+    }
+
+    public void setAmountOnDeposit(int amountOnDeposit) {
+        this.amountOnDeposit = amountOnDeposit;
+    }
+
+    public int getProfitability() {
+        return profitability;
+    }
+
+    public void setProfitability(int profitability) {
+        this.profitability = profitability;
+    }
+
+    public DepositType getType() {
+        return type;
+    }
+
+    public void setType(DepositType type) {
+        this.type = type;
+    }
+
+    public Date getTimeconstraints() {
+        return timeconstraints;
+    }
+
+    public void setTimeconstraints(Date timeconstraints) {
+        this.timeconstraints = timeconstraints;
+    }
+
+    @Override
+    public String toString() {
+        DateConverter dateConverter =new DateConverter();
+        return "Deposit{" +
+                "id='" + id + '\'' +
+                ", bankName='" + bankName + '\'' +
+                ", country='" + country + '\'' +
+                ", type=" + type +
+                ", depositor='" + depositor + '\'' +
+                ", accountID=" + accountID +
+                ", amountOnDeposit=" + amountOnDeposit +
+                ", profitability=" + profitability +
+                ", timeconstraints=" + dateConverter.convertDateToString(timeconstraints) +
+                '}';
+    }
+}
