@@ -1,0 +1,11 @@
+package by.epam.learn.daryatarasevich.bank.entity;
+
+public enum DepositType {
+    ONDEMAND,
+    PERIODIC,
+    CALCULATED,
+    ACCUMULATION,
+    SAVING,
+    METAL,
+}
+
