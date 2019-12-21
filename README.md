@@ -1,6 +1,6 @@
 # XML/XSD
-To create xml file that stores information about objects of certain subject area. To validate obtained xml-file,
-it is necessary to develop the corresponding xsd scheme. To parse xml document using DOM, SAX, StAX parsers.
+To create [xml file](https://github.com/darya1500/taskepam/blob/master/bankdeposits.xml) that stores information about objects of certain subject area. To validate obtained xml-file,
+it is necessary to develop the corresponding [xsd scheme](https://github.com/darya1500/taskepam/blob/master/bankdeposits.xsd). To parse xml document using [DOM](https://github.com/darya1500/taskepam/blob/master/src/main/java/by/epam/learn/daryatarasevich/bank/parsing/ParserDOM), [SAX](https://github.com/darya1500/taskepam/blob/master/src/main/java/by/epam/learn/daryatarasevich/bank/parsing/ParserSAX), [StAX parsers](https://github.com/darya1500/taskepam/blob/master/src/main/java/by/epam/learn/daryatarasevich/bank/parsing/ParserSTAX).
 ## TASK
 ### Bank deposits
 + Name - name of the bank.
@@ -24,4 +24,4 @@ Use:
 + create at least 16 entities in xml document
 + organize parsers using the Builder template
 + use Log4J2 for logging
-+ code should be covered by tests
++ code should be [covered by tests](https://github.com/darya1500/taskepam/tree/master/src/test/java/by/epam/learn/daryatarasevich/bank)
