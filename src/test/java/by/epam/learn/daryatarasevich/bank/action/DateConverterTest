@@ -1,0 +1,36 @@
+package by.epam.learn.daryatarasevich.bank.action;
+
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import static org.testng.Assert.*;
+
+public class DateConverterTest {
+    private DateConverter dateConverter;
+    private SimpleDateFormat simpleDateFormat;
+
+    @BeforeMethod
+    public void setUp() {
+        dateConverter=new DateConverter();
+        simpleDateFormat=new SimpleDateFormat();
+    }
+
+    @Test
+    public void testConvertDateToString_WhenDataIsCorrect_ShouldReturnCorrectResult() {
+        String expected="14 04 1970";
+        Date date=new Date(8888888888L);
+        String actual=dateConverter.convertDateToString(date);
+        assertEquals(actual,expected);
+    }
+
+    @Test
+    public void testConvertStringToDate_WhenDataIsCorrect_ShouldReturnCorrectResult() throws ParseException {
+        simpleDateFormat=new SimpleDateFormat("yyyy-MM-dd");
+        Date expected=simpleDateFormat.parse("1990-02-13");
+        Date actual=dateConverter.convertStringToDate("1990-02-13");
+        System.out.println(actual);
+        assertEquals(actual,expected);
+    }
+}
