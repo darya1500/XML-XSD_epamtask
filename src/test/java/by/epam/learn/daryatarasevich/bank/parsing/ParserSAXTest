@@ -1,0 +1,35 @@
+package by.epam.learn.daryatarasevich.bank.parsing;
+
+import by.epam.learn.daryatarasevich.bank.entity.Deposit;
+import by.epam.learn.daryatarasevich.bank.entity.DepositType;
+import by.epam.learn.daryatarasevich.bank.exception.IncorrectFilePathException;
+import by.epam.learn.daryatarasevich.bank.exception.XMLInvalidException;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+import org.xml.sax.SAXException;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import static org.testng.Assert.*;
+
+public class ParserSAXTest {
+    private ParserSAX parserSAX;
+    private List<Deposit> expected;
+    private String xml;
+    private String xsd;
+
+    @BeforeMethod
+    public void setUp() {
+        parserSAX = new ParserSAX();
+        xml = "bankdeposits.xml";
+        xsd = "bankdeposits.xsd";
+        expected = new ArrayList<>();
+        expected.add(new Deposit("a01","Priorbank","Belarus", DepositType.SAVING,"Ivanov", 281467, 120, 2, new Date(1634083200000L)));
+    }
+    @Test
+    public void testParse() throws ParserConfigurationException, XMLInvalidException, SAXException, IncorrectFilePathException, IOException {
+        assertEquals( parserSAX.parse(xml,xsd).get(0).toString(),expected.get(0).toString());
+    }
+}
